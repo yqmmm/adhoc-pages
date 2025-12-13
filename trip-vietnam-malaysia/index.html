@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>2026 春节行程（上海→胡志明→槟城→吉隆坡→长沙）</title>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#111a2e;
+      --muted:#93a4c7;
+      --text:#e9eefc;
+      --accent:#7aa2ff;
+      --ok:#39d98a;
+      --warn:#ffd166;
+      --line:#223154;
+      --chip:#162345;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "PingFang SC","Noto Sans CJK SC","Microsoft YaHei", sans-serif;
+      background:linear-gradient(180deg, var(--bg), #070b14 70%);
+      color:var(--text);
+    }
+    header{
+      padding:28px 18px 18px;
+      max-width:1050px;
+      margin:0 auto;
+    }
+    h1{margin:0 0 8px; font-size:22px; letter-spacing:.2px}
+    .sub{color:var(--muted); font-size:13px; line-height:1.5}
+    main{max-width:1050px; margin:0 auto; padding:0 18px 40px}
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:14px;
+    }
+    @media (max-width: 900px){
+      .grid{grid-template-columns:1fr}
+    }
+    .card{
+      background:rgba(17,26,46,.86);
+      border:1px solid rgba(34,49,84,.75);
+      border-radius:14px;
+      padding:14px 14px 12px;
+      box-shadow:0 10px 24px rgba(0,0,0,.22);
+      backdrop-filter: blur(6px);
+    }
+    h2{font-size:15px; margin:0 0 10px}
+    h3{font-size:13px; margin:14px 0 8px; color:#d7e1ff}
+    .chips{display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 0}
+    .chip{
+      font-size:12px; color:#dbe6ff;
+      background:var(--chip);
+      border:1px solid rgba(34,49,84,.9);
+      padding:6px 10px;
+      border-radius:999px;
+    }
+    .kvs{
+      display:grid; grid-template-columns:120px 1fr;
+      gap:8px 10px;
+      font-size:13px;
+      line-height:1.55;
+    }
+    .k{color:var(--muted)}
+    .v{color:var(--text)}
+    .timeline{
+      position:relative;
+      margin:6px 0 0;
+      padding-left:18px;
+    }
+    .timeline::before{
+      content:"";
+      position:absolute; left:7px; top:4px; bottom:4px;
+      width:2px; background:var(--line);
+      border-radius:2px;
+    }
+    .day{
+      position:relative;
+      padding:10px 10px 10px 12px;
+      margin:0 0 10px;
+      border:1px solid rgba(34,49,84,.75);
+      border-radius:12px;
+      background:rgba(8,12,22,.22);
+    }
+    .day::before{
+      content:"";
+      position:absolute; left:-15px; top:16px;
+      width:10px; height:10px; border-radius:50%;
+      background:var(--accent);
+      box-shadow:0 0 0 3px rgba(122,162,255,.18);
+    }
+    .date{
+      display:flex; align-items:center; gap:10px;
+      font-weight:600; font-size:13px;
+    }
+    .badge{
+      font-size:11px;
+      color:#061021;
+      background:var(--ok);
+      padding:3px 8px;
+      border-radius:999px;
+      font-weight:700;
+    }
+    .badge.arrival{background:#7aa2ff}
+    .badge.city{background:#50cba8}
+    .badge.transit{background:#9fa6ff}
+    .badge.outdoor{background:#ff9f7a}
+    .badge.return{background:#c5ccd8}
+    .badge.warn{background:var(--warn)}
+    .pill{
+      display:inline-block;
+      padding:2px 8px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:700;
+      margin-right:8px;
+      vertical-align:1px;
+    }
+    .pill-flight{background:#ffd166; color:#1f1600}
+    .flight{
+      border-left:3px solid #ffd166;
+      padding-left:8px;
+      background:rgba(255,209,102,.06);
+      border-radius:6px;
+    }
+    .day.has-flight{border-color:rgba(255,209,102,.5)}
+    .day.has-flight::before{background:#ffd166; box-shadow:0 0 0 3px rgba(255,209,102,.22)}
+    ul{margin:8px 0 0 18px; padding:0}
+    li{margin:6px 0; color:#dfe7ff; font-size:13px; line-height:1.55}
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .small{font-size:12px; color:var(--muted); line-height:1.55}
+    .footer{
+      margin-top:14px;
+      padding-top:12px;
+      border-top:1px solid rgba(34,49,84,.7);
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.6;
+    }
+    .checklist label{
+      display:flex; gap:10px; align-items:flex-start;
+      font-size:13px; line-height:1.5; margin:8px 0;
+      color:#dfe7ff;
+    }
+    .checklist input{margin-top:3px}
+    .muted{color:var(--muted)}
+    .two-col{
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width: 700px){
+      .two-col{grid-template-columns:1fr}
+    }
+    .hotel-list{display:grid; gap:10px}
+    .hotel-card{
+      border:1px solid rgba(34,49,84,.8);
+      background:rgba(17,26,46,.65);
+      border-radius:12px;
+      padding:10px 12px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>2026 春节行程（上海 → 胡志明 → 槟城 → 吉隆坡 → 长沙）</h1>
+    <div class="sub">
+      时间：2026-02-06 ～ 2026-02-13（共 8 天，含往返日）<br/>
+      最近更新：2026-12-13（已出票航班：2/6 CZ6077；2/9 AK1503；2/13 D7352）
+    </div>
+    <div class="chips">
+      <span class="chip">胡志明 3 晚</span>
+      <span class="chip">槟城 3 晚</span>
+      <span class="chip">吉隆坡 1 晚</span>
+      <span class="chip">重点：美食 / 城市氛围 / 周边轻户外</span>
+      <span class="chip">航班已出票 ×3</span>
+    </div>
+  </header>
+
+  <main class="grid">
+    <section class="card">
+      <h2>行程总览</h2>
+      <div class="timeline">
+
+        <div class="day has-flight">
+          <div class="date">Day 1 · 2/6（周五）胡志明 <span class="badge arrival">抵达日</span></div>
+          <ul>
+            <li class="flight"><span class="pill pill-flight">航班</span><strong>CZ6077</strong> 08:35 PVG T2 → 12:10 SGN（新山一 T2）· ¥1929</li>
+            <li>酒店：<a href="https://www.google.com/maps/search/?api=1&query=Kin+Hotel+Thi+Sach" target="_blank" rel="noopener">Kin Hotel Thi Sach</a> · 2/6–2/9 · 地址：11A Thi Sach, Ben Nghe, D1</li>
+            <li>下午轻量城市线：中央邮局 / 红教堂外观 / 市政厅周边；晚上 Rooftop Bar 或范五老街散步</li>
+          </ul>
+        </div>
+
+        <div class="day">
+          <div class="date">Day 2 · 2/7（周六）胡志明 <span class="badge city">城市日</span></div>
+          <ul>
+            <li>城市核心：战争遗迹博物馆（半天）+ 统一宫 / 咖啡馆</li>
+            <li>晚间：河边散步 / 夜市（按体力择一）</li>
+          </ul>
+        </div>
+
+        <div class="day">
+          <div class="date">Day 3 · 2/8（周日）湄公河三角洲一日游 <span class="badge warn">早起</span></div>
+          <ul>
+            <li>建议 07:30 左右出发（拼团/包车）：水上市场、椰林小船、乡村午餐</li>
+            <li>17:00–18:00 返回胡志明；晚上自由活动（轻松吃喝）</li>
+          </ul>
+        </div>
+
+        <div class="day has-flight">
+          <div class="date">Day 4 · 2/9（周一）胡志明 → 槟城 <span class="badge transit">跨城飞行</span></div>
+          <ul>
+            <li class="flight"><span class="pill pill-flight">航班</span><strong>AK1503</strong> 13:35 SGN（新山一 T2） → 16:15 PEN · ¥879</li>
+            <li>酒店：<a href="https://www.google.com/maps/search/?api=1&query=Citadines+Connect+Bertam+Georgetown+Penang" target="_blank" rel="noopener">Citadines Connect Bertam Georgetown Penang</a> · 2/9–2/10 · ¥551.25 · 地址：428, Jln Penang, George Town</li>
+            <li>抵达后直奔乔治市（George Town）入住；当晚主线：夜市/小吃（把“槟城第一顿”留给晚上）</li>
+          </ul>
+        </div>
+
+        <div class="day">
+          <div class="date">Day 5 · 2/10（周二）槟城 · 乔治市 + 美食 <span class="badge city">城市日</span></div>
+          <ul>
+            <li>酒店：<a href="https://www.google.com/maps/search/?api=1&query=The+Prestige+Hotel+George+Town" target="_blank" rel="noopener">The Prestige Hotel</a> · 2/10–2/12 · ¥1670.19（含税，按 970.06 MYR）</li>
+            <li>上午：乔治市街区漫游（骑楼/街头艺术/老宅）</li>
+            <li>下午：咖啡馆 + 小众店；按兴趣补充：博物馆/老宅参观</li>
+            <li>晚上：小吃集中扫街（建议少量多点）</li>
+          </ul>
+        </div>
+
+        <div class="day">
+          <div class="date">Day 6 · 2/11（周三）槟城 · 槟城山 / 极乐寺 <span class="badge outdoor">轻户外</span></div>
+          <ul>
+            <li>上午：槟城山（缆车上山，看视野；避免正午暴晒）</li>
+            <li>下午：极乐寺；傍晚可选 Batu Ferringhi 海边放松</li>
+          </ul>
+        </div>
+
+        <div class="day has-flight">
+          <div class="date">Day 7 · 2/12（周四）槟城 → 吉隆坡 <span class="badge transit">转场</span></div>
+          <ul>
+            <li>建议选择：<strong>飞行（约 1 小时）</strong>优先；备选长途巴士/火车（更耗时）</li>
+            <li class="flight"><span class="pill pill-flight">航班</span>抵达吉隆坡后入住；夜间：KLCC 夜景或阿罗街夜市（二选一）</li>
+            <li>酒店：<a href="https://www.google.com/maps/search/?api=1&query=WOLO+Kuala+Lumpur" target="_blank" rel="noopener">WOLO Kuala Lumpur</a>（Copper Room King）· 2/12–2/13 · ¥491.47（按 285.45 MYR）</li>
+          </ul>
+        </div>
+
+        <div class="day has-flight">
+          <div class="date">Day 8 · 2/13（周五）吉隆坡 → 长沙 <span class="badge return">返程</span></div>
+          <ul>
+            <li>上午半天：购物/咖啡/最后一顿马来餐；13:30–14:30 前往机场较稳</li>
+            <li class="flight"><span class="pill pill-flight">航班</span><strong>D7352</strong> 17:45 KUL T2 → 22:35 CSX T2 · ¥2953</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer">
+        <div><strong>备注：</strong>该版本以“体验优先（槟城替代马六甲）”为目标；如你们希望更轻松，可将胡志明压缩 1 天并给槟城增加 1 天。</div>
+      </div>
+    </section>
+
+    <aside class="card">
+      <h2 style="margin-top:14px">航班出票信息</h2>
+      <div class="kvs">
+        <div class="k">2/6</div><div class="v">CZ6077 上海浦东 T2 → 胡志明新山一 T2 · 08:35–12:10 · ¥1929</div>
+        <div class="k">2/9</div><div class="v">AK1503 胡志明新山一 T2 → 槟城国际 · 13:35–16:15 · ¥879</div>
+        <div class="k">2/13</div><div class="v">D7352 吉隆坡国际 T2 → 长沙黄花 T2 · 17:45–22:35 · ¥2953</div>
+      </div>
+
+      <h2 style="margin-top:14px">已订酒店</h2>
+      <div class="hotel-list">
+        <div class="hotel-card">
+          <div class="kvs">
+            <div class="k">城市</div><div class="v">胡志明市 · 第一区</div>
+            <div class="k">酒店</div><div class="v"><a href="https://www.google.com/maps/search/?api=1&query=Kin+Hotel+Thi+Sach" target="_blank" rel="noopener">Kin Hotel Thi Sach</a></div>
+            <div class="k">价格</div><div class="v">¥2155.53（3 晚总价）</div>
+            <div class="k">入住</div><div class="v">2/6 入住，2/9 退房 · 3 晚</div>
+            <div class="k">地址</div><div class="v">11A Thi Sach, Ben Nghe, District 1</div>
+          </div>
+        </div>
+        <div class="hotel-card">
+          <div class="kvs">
+            <div class="k">城市</div><div class="v">槟城 · 乔治市</div>
+            <div class="k">酒店</div><div class="v"><a href="https://www.google.com/maps/search/?api=1&query=Citadines+Connect+Bertam+Georgetown+Penang" target="_blank" rel="noopener">Citadines Connect Bertam Georgetown Penang</a></div>
+            <div class="k">价格</div><div class="v">¥551.25（1 晚总价）</div>
+            <div class="k">入住</div><div class="v">2/9 入住，2/10 退房 · 1 晚</div>
+            <div class="k">地址</div><div class="v">428, Jln Penang, George Town, 10000 George Town, Pulau Pinang, 马来西亚</div>
+          </div>
+        </div>
+        <div class="hotel-card">
+          <div class="kvs">
+            <div class="k">城市</div><div class="v">槟城 · 乔治市</div>
+            <div class="k">酒店</div><div class="v"><a href="https://www.google.com/maps/search/?api=1&query=The+Prestige+Hotel+George+Town" target="_blank" rel="noopener">The Prestige Hotel</a> · Deluxe Room King</div>
+            <div class="k">价格</div><div class="v">¥1670.19（含税总价，按 970.06 MYR，2 晚）</div>
+            <div class="k">入住</div><div class="v">2/10 入住，2/12 退房 · 2 晚</div>
+            <div class="k">地址</div><div class="v">8 Gat Lebuh Gereja, 10300 George Town, Malaysia</div>
+          </div>
+        </div>
+        <div class="hotel-card">
+          <div class="kvs">
+            <div class="k">城市</div><div class="v">吉隆坡 · 武吉免登</div>
+            <div class="k">酒店</div><div class="v"><a href="https://www.google.com/maps/search/?api=1&query=WOLO+Kuala+Lumpur" target="_blank" rel="noopener">WOLO Kuala Lumpur</a> · Copper Room King</div>
+            <div class="k">价格</div><div class="v">¥491.47（按 285.45 MYR，总价）</div>
+            <div class="k">入住</div><div class="v">2/12 入住，2/13 退房 · 1 晚</div>
+            <div class="k">地址</div><div class="v">Corner of Jln Sultan Ismail, Bukit Bintang, 55100 Kuala Lumpur, Malaysia</div>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+  </main>
+</body>
+</html>
