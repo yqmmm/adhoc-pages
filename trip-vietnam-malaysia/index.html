@@ -161,6 +161,26 @@
       border-radius:12px;
       padding:10px 12px;
     }
+    .cost-summary{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+      gap:10px;
+      margin:6px 0 14px;
+    }
+    .stat{
+      border:1px solid rgba(122,162,255,.35);
+      background:linear-gradient(140deg, rgba(122,162,255,.16), rgba(17,26,46,.8));
+      border-radius:12px;
+      padding:10px 12px;
+      box-shadow:0 8px 20px rgba(0,0,0,.18);
+    }
+    .stat.total{
+      border-color:rgba(57,217,138,.55);
+      background:linear-gradient(140deg, rgba(57,217,138,.18), rgba(17,26,46,.82));
+    }
+    .stat .label{font-size:12px; color:var(--muted); margin-bottom:4px}
+    .stat .value{font-size:20px; font-weight:700; color:var(--text)}
+    .stat .sub{font-size:12px; color:var(--muted); margin-top:2px}
   </style>
 </head>
 <body>
@@ -261,6 +281,24 @@
     </section>
 
     <aside class="card">
+      <h2 style="margin-top:14px">费用速览</h2>
+      <div class="cost-summary">
+        <div class="stat total">
+          <div class="label">航班 + 酒店合计</div>
+          <div class="value">¥10629.44</div>
+          <div class="sub">航班 ¥5761 · 酒店 ¥4868.44</div>
+        </div>
+        <div class="stat">
+          <div class="label">航班（3 段）</div>
+          <div class="value">¥5761</div>
+          <div class="sub">已出票 CZ6077 / AK1503 / D7352</div>
+        </div>
+        <div class="stat">
+          <div class="label">酒店（4 份订单）</div>
+          <div class="value">¥4868.44</div>
+          <div class="sub">胡志明 3 晚 · 槟城 3 晚 · 吉隆坡 1 晚</div>
+        </div>
+      </div>
       <h2 style="margin-top:14px">航班出票信息</h2>
       <div class="kvs">
         <div class="k">2/6</div><div class="v">CZ6077 上海浦东 T2 → 胡志明新山一 T2 · 08:35–12:10 · ¥1929</div>
